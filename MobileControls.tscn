@@ -1,0 +1,78 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/Icons/Arrow.png" type="Texture" id=1]
+[ext_resource path="res://Puzzles/Tutorial/MobileControls.gd" type="Script" id=2]
+
+[node name="Control" type="Control"]
+anchor_top = 0.669
+anchor_right = 0.297
+anchor_bottom = 1.0
+margin_top = -64.4
+margin_right = 15.872
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+anchor_left = 0.113
+anchor_top = 0.562
+anchor_right = 0.207
+anchor_bottom = 0.722
+margin_left = 79.84
+margin_top = -100.945
+margin_right = 145.76
+margin_bottom = -47.0248
+texture = ExtResource( 1 )
+flip_v = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+anchor_left = 0.113
+anchor_top = 0.722
+anchor_right = 0.207
+anchor_bottom = 0.882
+margin_left = 79.84
+margin_top = -45.6899
+margin_right = 145.76
+margin_bottom = 8.23007
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+anchor_left = 0.207
+anchor_top = 0.722
+anchor_right = 0.301
+anchor_bottom = 0.882
+margin_left = 145.76
+margin_top = 50.3101
+margin_right = 211.68
+margin_bottom = 104.23
+rect_rotation = -90.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+anchor_left = 0.02
+anchor_top = 0.722
+anchor_right = 0.113
+anchor_bottom = 0.882
+margin_left = 109.6
+margin_top = -45.69
+margin_right = 175.84
+margin_bottom = 8.23004
+rect_rotation = 90.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="TextureRect2" to="." method="up"]
+[connection signal="gui_input" from="TextureRect3" to="." method="down"]
+[connection signal="gui_input" from="TextureRect5" to="." method="right"]
+[connection signal="gui_input" from="TextureRect4" to="." method="left"]

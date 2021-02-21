@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://Puzzles/Tutorial/Tutorial.gd" type="Script" id=1]
+[ext_resource path="res://GroundTexture.png" type="Texture" id=2]
+[ext_resource path="res://Heartbeat.tres" type="Material" id=3]
+[ext_resource path="res://Entities/Player/MeshInstance.tscn" type="PackedScene" id=4]
+[ext_resource path="res://BeatContainer.png" type="Texture" id=5]
+[ext_resource path="res://Entities/Button/Button.tscn" type="PackedScene" id=6]
+[ext_resource path="res://BeatMark.png" type="Texture" id=7]
+[ext_resource path="res://Entities/LevelEnd/LevelEnd.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Music/Speed1CKey2.wav" type="AudioStream" id=9]
+[ext_resource path="res://Entities/Button/MultiButtons.gd" type="Script" id=10]
+[ext_resource path="res://Music/Speed1FKey.wav" type="AudioStream" id=11]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+flags_world_triplanar = true
+albedo_texture = ExtResource( 2 )
+uv1_offset = Vector3( 0.5, 0.5, 0 )
+uv1_triplanar = true
+
+[sub_resource type="Environment" id=2]
+background_mode = 1
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 1 )
+song = ExtResource( 11 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+use_collision = true
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.493, 0.5 )
+operation = 2
+invert_faces = true
+width = 7.0
+height = 1.5
+depth = 7.0
+material = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 10.4901, 4.00243 )
+
+[node name="UI" type="Control" parent="Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="TextureRect" parent="Camera/UI"]
+anchor_left = 0.431
+anchor_top = 0.772
+anchor_right = 0.806
+anchor_bottom = 0.985
+margin_left = 0.297577
+margin_top = 0.0672913
+margin_right = 0.297546
+margin_bottom = 0.267273
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="ColorRect" parent="Camera/UI/TextureRect5"]
+show_behind_parent = true
+material = ExtResource( 3 )
+anchor_right = 0.333
+anchor_bottom = 0.984
+margin_right = 0.127998
+margin_bottom = 2.04797
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect5" type="ColorRect" parent="Camera/UI/TextureRect5"]
+show_behind_parent = true
+material = ExtResource( 3 )
+anchor_left = 0.333
+anchor_right = 0.667
+anchor_bottom = 1.0
+margin_left = 0.127998
+margin_right = -0.128021
+margin_bottom = -3.05176e-05
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect6" type="ColorRect" parent="Camera/UI/TextureRect5"]
+show_behind_parent = true
+material = ExtResource( 3 )
+anchor_left = 0.667
+anchor_right = 1.0
+anchor_bottom = 0.984
+margin_left = -0.128021
+margin_bottom = 2.04797
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect4" type="TextureRect" parent="Camera/UI/TextureRect5"]
+anchor_right = 0.333
+anchor_bottom = 1.0
+margin_right = 0.127998
+margin_bottom = -3.05176e-05
+texture = ExtResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="Area" parent="." instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.270341, 0.50002 )
+next_level = "res://Puzzles/Level12/Level.tscn"
+active = false
+
+[node name="MeshInstance" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.27, 3.5 )
+
+[node name="MeshInstance2" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.27, -2.5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="Spatial" type="Spatial" parent="."]
+script = ExtResource( 10 )
+
+[node name="Area2" parent="Spatial" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2.5 )
+
+[node name="Area3" parent="Spatial" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.5 )
+[connection signal="full" from="Spatial" to="Area" method="set_activate"]
+[connection signal="pressed" from="Spatial/Area2" to="Spatial" method="get_presses"]
+[connection signal="pressed" from="Spatial/Area3" to="Spatial" method="get_presses"]

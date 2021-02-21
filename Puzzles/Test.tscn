@@ -1,0 +1,131 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://GroundTexture.png" type="Texture" id=1]
+[ext_resource path="res://Entities/Player/MeshInstance.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Beat.png" type="Texture" id=3]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://Entities/MovingWall/Mover.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Entities/Teleporter/Teleporter.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+flags_world_triplanar = true
+albedo_texture = ExtResource( 1 )
+uv1_offset = Vector3( 0.5, 0.5, 0 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+uniform sampler2D beat_image;
+
+void fragment(){
+	vec2 uv = UV;
+	uv.x+=TIME/3f;
+	COLOR=texture(beat_image,uv);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/beat_image = ExtResource( 3 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+uniform vec4 dark_colour : hint_color;
+uniform vec4 light_colour : hint_color;
+void fragment(){
+    float colour = round(textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).r);
+    COLOR = (1.0-colour)*dark_colour + colour*light_colour;
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/dark_colour = Color( 0.133333, 0.137255, 0.137255, 1 )
+shader_param/light_colour = Color( 0.941176, 0.964706, 0.941176, 1 )
+
+[sub_resource type="Environment" id=7]
+background_mode = 1
+
+[sub_resource type="DynamicFont" id=8]
+size = 40
+font_data = ExtResource( 4 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0 )
+material_override = SubResource( 1 )
+use_collision = true
+
+[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+width = 20.0
+depth = 15.0
+material = SubResource( 2 )
+
+[node name="CSGBox2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49261, 0 )
+operation = 2
+width = 19.0
+height = 1.5
+depth = 14.0
+material = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 10.4901, 4.00243 )
+
+[node name="TextureRect" type="ColorRect" parent="Camera"]
+material = SubResource( 4 )
+anchor_left = 0.875
+anchor_right = 1.0
+anchor_bottom = 0.213
+margin_left = -6.10352e-05
+margin_bottom = 0.199989
+
+[node name="ColorRect" type="ColorRect" parent="Camera"]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 7 )
+
+[node name="Entity2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.270341, -2.49998 )
+
+[node name="Entity3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.270341, -2.49998 )
+
+[node name="Entity4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.270341, -1.49998 )
+angle = 90
+
+[node name="Entity5" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.270341, -1.49998 )
+angle = 180
+
+[node name="Entity6" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.270341, -2.49998 )
+angle = 270
+
+[node name="Entity" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.270341, -6.49998 )
+mov_array = [ Vector3( 0, 0, -1 ), Vector3( 0, 0, 1 ) ]
+
+[node name="MeshInstance" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.270341, -6.49998 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 8 )
+text = "DEBUG ROOM
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

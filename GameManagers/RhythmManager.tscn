@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GameManagers/RhythmManager.gd" type="Script" id=1]
+[ext_resource path="res://Sounds/HeartBeat.wav" type="AudioStream" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float offset = 1f;
+
+void fragment(){
+	vec4 green_channel = texture(SCREEN_TEXTURE, SCREEN_UV);
+	vec4 red_channel = texture(SCREEN_TEXTURE, vec2(SCREEN_UV.x + (offset * SCREEN_PIXEL_SIZE.x), SCREEN_UV.y));
+	vec4 blue_channel = texture(SCREEN_TEXTURE, vec2(SCREEN_UV.x - (offset * SCREEN_PIXEL_SIZE.x), SCREEN_UV.y));
+	COLOR = vec4(red_channel.r, green_channel.g, blue_channel.b, 1f);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/offset = 1.5
+
+[node name="RhythmManager" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = -6.0
+bus = "SFX"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 15
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="CanvasLayer"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Entities/Player/PerfectText.gd" type="Script" id=1]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+font_data = ExtResource( 2 )
+
+[node name="Label" type="Label"]
+anchor_left = 0.663
+anchor_top = 0.172
+anchor_right = 0.96
+anchor_bottom = 0.267
+margin_left = 0.162537
+margin_top = 0.0666122
+margin_right = 0.0345459
+margin_bottom = 0.0666046
+custom_fonts/font = SubResource( 5 )
+text = "PERFECT!"
+percent_visible = 0.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

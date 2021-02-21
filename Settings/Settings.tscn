@@ -1,0 +1,306 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Settings/ChangeColour.gd" type="Script" id=3]
+[ext_resource path="res://UI/Icons/Settings.png" type="Texture" id=4]
+[ext_resource path="res://UI/Icons/Reset.png" type="Texture" id=5]
+[ext_resource path="res://Settings/Open.gd" type="Script" id=6]
+[ext_resource path="res://Settings/Volume.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 22
+corner_radius_top_right = 22
+corner_radius_bottom_right = 22
+corner_radius_bottom_left = 22
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 1, 1, 1, 1 )
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="DynamicFont" id=3]
+size = 29
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxLine" id=5]
+color = Color( 1, 1, 1, 1 )
+thickness = 5
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="Settings" type="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1.5874
+margin_right = 1.5874
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchor_left = 0.293
+anchor_top = 0.108
+anchor_right = 0.707
+anchor_bottom = 0.892
+margin_left = 0.467987
+margin_top = 0.199997
+margin_right = -0.468018
+margin_bottom = -0.200012
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Panel"]
+anchor_left = 0.082
+anchor_top = 0.614
+anchor_right = 0.918
+anchor_bottom = 0.974
+margin_left = -0.186001
+margin_top = 0.0238647
+margin_right = 0.185974
+margin_bottom = -0.176147
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Panel/Panel2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="VBoxContainer" parent="CanvasLayer/Panel/Panel2/MarginContainer"]
+margin_right = 353.0
+margin_bottom = 168.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer"]
+margin_top = 38.0
+margin_right = 353.0
+margin_bottom = 74.0
+mouse_filter = 2
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Button5" type="Button" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer/HBoxContainer"]
+margin_left = 9.0
+margin_right = 138.0
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "DEFAULT"
+script = ExtResource( 3 )
+
+[node name="Button3" type="Button" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer/HBoxContainer"]
+margin_left = 154.0
+margin_right = 232.0
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "WILD"
+script = ExtResource( 3 )
+
+[node name="Button4" type="Button" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer/HBoxContainer"]
+margin_left = 248.0
+margin_right = 343.0
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "NOKIA"
+script = ExtResource( 3 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer"]
+margin_top = 94.0
+margin_right = 353.0
+margin_bottom = 130.0
+mouse_filter = 2
+custom_constants/separation = 16
+alignment = 1
+
+[node name="Button2" type="Button" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer/HBoxContainer2"]
+margin_left = 73.0
+margin_right = 168.0
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "MANGA"
+script = ExtResource( 3 )
+
+[node name="Button3" type="Button" parent="CanvasLayer/Panel/Panel2/MarginContainer/GridContainer/HBoxContainer2"]
+margin_left = 184.0
+margin_right = 279.0
+margin_bottom = 36.0
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "NOIRE"
+script = ExtResource( 3 )
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Panel"]
+anchor_left = 0.054
+anchor_top = 0.061
+anchor_right = 0.946
+anchor_bottom = 0.511
+margin_left = 0.157999
+margin_top = 0.329998
+margin_right = -0.15802
+margin_bottom = -0.170013
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 7 )
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel/Panel"]
+anchor_left = 0.277
+anchor_top = 0.114
+anchor_right = 0.723
+anchor_bottom = 0.218
+margin_left = 0.0709991
+margin_top = -0.0123672
+margin_right = -0.0710144
+margin_bottom = 0.0436325
+custom_fonts/font = SubResource( 4 )
+text = "MUSIC VOLUME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" type="HSlider" parent="CanvasLayer/Panel/Panel"]
+anchor_left = 0.056
+anchor_top = 0.288
+anchor_right = 0.944
+anchor_bottom = 0.363
+margin_left = -0.112001
+margin_top = -0.0791168
+margin_right = 0.111969
+margin_bottom = 0.0958862
+custom_styles/slider = SubResource( 5 )
+custom_styles/grabber_area_highlight = SubResource( 6 )
+custom_styles/grabber_area = SubResource( 7 )
+min_value = -25.0
+max_value = -2.0
+value = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="CanvasLayer/Panel/Panel"]
+anchor_left = 0.277
+anchor_top = 0.114
+anchor_right = 0.723
+anchor_bottom = 0.218
+margin_left = 0.570999
+margin_top = 74.2338
+margin_right = 0.428986
+margin_bottom = 74.2898
+custom_fonts/font = SubResource( 4 )
+text = "SOUND VOLUME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider2" type="HSlider" parent="CanvasLayer/Panel/Panel"]
+anchor_left = 0.056
+anchor_top = 0.288
+anchor_right = 0.944
+anchor_bottom = 0.363
+margin_left = 0.387999
+margin_top = 74.1671
+margin_right = 0.611969
+margin_bottom = 74.3421
+custom_styles/slider = SubResource( 5 )
+custom_styles/grabber_area_highlight = SubResource( 6 )
+custom_styles/grabber_area = SubResource( 7 )
+min_value = -25.0
+max_value = -2.0
+value = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+anchor_left = 0.161
+anchor_top = 0.521
+anchor_right = 0.839
+anchor_bottom = 0.598
+margin_left = -0.103004
+margin_top = 0.12999
+margin_right = 0.102966
+margin_bottom = -0.0600281
+custom_fonts/font = SubResource( 8 )
+text = "Colour Palettes"
+align = 1
+valign = 1
+
+[node name="Open" type="Button" parent="CanvasLayer"]
+anchor_left = 0.941
+anchor_top = 0.115
+anchor_right = 1.0
+anchor_bottom = 0.205
+margin_left = 0.415955
+margin_top = -0.0971832
+margin_bottom = -0.0971909
+icon = ExtResource( 4 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset2" type="Button" parent="CanvasLayer"]
+anchor_left = 0.879
+anchor_top = 0.115
+anchor_right = 0.937
+anchor_bottom = 0.205
+margin_left = -0.279419
+margin_top = -0.0971832
+margin_right = 0.328613
+margin_bottom = -0.0971909
+icon = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="CanvasLayer/Panel/Panel/HSlider" to="CanvasLayer/Panel/Panel" method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Panel/Panel/HSlider2" to="CanvasLayer/Panel/Panel" method="_on_HSlider2_value_changed"]
+[connection signal="pressed" from="CanvasLayer/Open" to="CanvasLayer/Open" method="_on_Open_pressed"]
+[connection signal="pressed" from="CanvasLayer/Reset2" to="CanvasLayer/Open" method="_on_Reset2_pressed"]

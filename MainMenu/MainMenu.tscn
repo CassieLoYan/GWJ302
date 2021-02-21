@@ -1,0 +1,167 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Entities/Player/Texture.png" type="Texture" id=1]
+[ext_resource path="res://GroundTexture.png" type="Texture" id=2]
+[ext_resource path="res://VCR_OSD_MONO_1.001.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://MainMenu/3DButton.gd" type="Script" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 0.5, 0.5, 0.5 )
+uv1_offset = Vector3( 0.5, 0.5, 0.5 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_unshaded = true
+albedo_texture = ExtResource( 2 )
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id=4]
+material = SubResource( 3 )
+size = Vector2( 10, 10 )
+
+[sub_resource type="Environment" id=5]
+background_mode = 1
+
+[sub_resource type="DynamicFont" id=6]
+size = 64
+font_data = ExtResource( 3 )
+
+[sub_resource type="ViewportTexture" id=7]
+viewport_path = NodePath("3DText/Viewport")
+
+[sub_resource type="SpatialMaterial" id=8]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = SubResource( 7 )
+
+[sub_resource type="QuadMesh" id=9]
+size = Vector2( 5, 5 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.710657, 0.284602, 0.14467 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 72
+font_data = ExtResource( 3 )
+
+[sub_resource type="ViewportTexture" id=12]
+viewport_path = NodePath("Play/Viewport")
+
+[sub_resource type="SpatialMaterial" id=13]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = SubResource( 12 )
+
+[sub_resource type="ViewportTexture" id=14]
+viewport_path = NodePath("Settings/Viewport")
+
+[sub_resource type="SpatialMaterial" id=15]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+albedo_texture = SubResource( 14 )
+
+[sub_resource type="BoxShape" id=16]
+extents = Vector3( 0.979104, 0.284602, 0.14467 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 2.5, 0, -3.86603 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="Camera" type="Camera" parent="."]
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 5 )
+
+[node name="3DText" type="Spatial" parent="."]
+
+[node name="Viewport" type="Viewport" parent="3DText"]
+size = Vector2( 1024, 768 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="3DText/Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 6 )
+text = "Mechanical Heartbeats"
+
+[node name="MeshInstance" type="MeshInstance" parent="3DText"]
+transform = Transform( 0.941176, 0, 0.337917, 0, 1, 0, -0.337917, 0, 0.941176, 0, -1.0216, -3.02178 )
+material_override = SubResource( 8 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 8 )
+
+[node name="Play" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.491255, 0 )
+script = ExtResource( 4 )
+type = "play"
+
+[node name="ClickDetection" type="Area" parent="Play"]
+transform = Transform( 0.941176, 0, 0.337917, 0, 1, 0, -0.337917, 0, 0.941176, 0, 1.00502, -3.02178 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Play/ClickDetection"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.90215, 0.299835, 2.38419e-07 )
+shape = SubResource( 10 )
+
+[node name="Viewport" type="Viewport" parent="Play"]
+size = Vector2( 1024, 768 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Play/Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 11 )
+text = "Play"
+
+[node name="MeshInstance" type="MeshInstance" parent="Play"]
+transform = Transform( 0.941176, 0, 0.337917, 0, 1, 0, -0.337917, 0, 0.941176, 0, -1.0216, -3.02178 )
+material_override = SubResource( 13 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 8 )
+
+[node name="Settings" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.01231, 0 )
+script = ExtResource( 4 )
+type = "settings"
+
+[node name="Viewport" type="Viewport" parent="Settings"]
+size = Vector2( 1024, 768 )
+transparent_bg = true
+render_target_v_flip = true
+
+[node name="Label" type="Label" parent="Settings/Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 11 )
+text = "Settings"
+
+[node name="MeshInstance" type="MeshInstance" parent="Settings"]
+transform = Transform( 0.941176, 0, 0.337917, 0, 1, 0, -0.337917, 0, 0.941176, 0, -1.0216, -3.02178 )
+material_override = SubResource( 15 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 8 )
+
+[node name="ClickDetection" type="Area" parent="Settings"]
+transform = Transform( 0.941176, 0, 0.337917, 0, 1, 0, -0.337917, 0, 0.941176, 0, 0.850432, -3.02178 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Settings/ClickDetection"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.73877, 0.299835, 7.15256e-07 )
+shape = SubResource( 16 )
+[connection signal="input_event" from="Play/ClickDetection" to="Play" method="_on_ClickDetection_input_event"]
+[connection signal="input_event" from="Settings/ClickDetection" to="Settings" method="_on_ClickDetection_input_event"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Speed05CKey2.wav-608d93067b4a2257935da2bf9933afa0.sample"
+
+[deps]
+
+source_file="res://Music/Speed05CKey2.wav"
+dest_files=[ "res://.import/Speed05CKey2.wav-608d93067b4a2257935da2bf9933afa0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
